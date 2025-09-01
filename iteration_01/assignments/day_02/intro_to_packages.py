@@ -97,19 +97,31 @@ print("I have chosen a complex number with real and imaginary parts between -5 a
 # - Convert inputs to integers
 # - Use if/else to give “too high” / “too low” feedback
 
-real_guess = int(input("Enter a guess for the real part: "))
-imag_guess = int(input("Enter a guess for the imaginary part: "))
-guess = complex(real_guess, imag_guess)
+answer = False
 
-if guess == target:
-    print("You guessed correctly!")
 
-elif guess < target:
-    print("Too low!")
+while not answer:
+    real_guess = int(input("Enter a guess for the real part: "))
+    imag_guess = int(input("Enter a guess for the imaginary part: "))
+    guess = complex(real_guess, imag_guess)
+    print(guess)
+    print(target)
 
-else:
-    print("Too high!")
-
+    if guess == target:
+        print("You guessed correctly!")
+        answer = True
+    elif guess.real < target.real and guess.imag < target.imag:
+        print("Real and imaginary parts are too low!")
+        answer = False
+    elif guess.real > target.real and guess.imag > target.imag:
+        print("Real and imaginary parts are too high!")
+        answer = False
+    elif guess.real > target.real and guess.imag < target.imag:
+        print("Real part is too high! Imaginary part is too low!")
+        answer = False
+    elif guess.real < target.real and guess.imag > target.imag:
+        print("Real part is too low! Imaginary part is too high!")
+        answer = False
 # ---------------------------------------------------
 # Extensions (Optional)
 # - Limit the number of guesses
