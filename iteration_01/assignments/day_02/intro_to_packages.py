@@ -23,7 +23,8 @@ with help(), and fill in the TODOs. Test your code after each level.
 import random
 # TODO: Generate and print 3 random integers between 1 and 10
 
-
+for i in range(3):
+    print(random.randint(1, 10))
 # ---------------------------------------------------
 # Level 2 – Complex Numbers with cmath
 # Task:
@@ -35,7 +36,7 @@ import random
 import cmath
 # TODO: Print the square root of -1 using cmath
 
-
+print(cmath.sqrt(-1))
 # ---------------------------------------------------
 # Level 3 – User Input Basics
 # Task:
@@ -45,7 +46,8 @@ import cmath
 
 # TODO: Ask for the user’s name and print a greeting
 
-
+name = input("Enter your name: ")
+print(f"Hello, {name}")
 # ---------------------------------------------------
 # Level 4 – Converting Input to Numbers
 # Task:
@@ -56,7 +58,8 @@ import cmath
 
 # TODO: Ask for a number, convert it to int, double it, and print
 
-
+num = int(input("Enter a number: "))
+print(num * 2)
 # ---------------------------------------------------
 # Level 5 – Random Complex Numbers
 # Task:
@@ -67,7 +70,9 @@ import cmath
 
 # TODO: Generate a random complex number with integer real and imaginary parts
 
-
+real = random.randint(-10, 10)
+imag = random.randint(-10, 10)
+print(complex(real, imag))
 # ---------------------------------------------------
 # Level 6 – Complex Number Guesser Game
 # Rules:
@@ -92,6 +97,18 @@ print("I have chosen a complex number with real and imaginary parts between -5 a
 # - Convert inputs to integers
 # - Use if/else to give “too high” / “too low” feedback
 
+real_guess = int(input("Enter a guess for the real part: "))
+imag_guess = int(input("Enter a guess for the imaginary part: "))
+guess = complex(real_guess, imag_guess)
+
+if guess == target:
+    print("You guessed correctly!")
+
+elif guess < target:
+    print("Too low!")
+
+else:
+    print("Too high!")
 
 # ---------------------------------------------------
 # Extensions (Optional)

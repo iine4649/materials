@@ -12,7 +12,7 @@ Your job is to experiment, fill in blanks, and notice how lists and dictionaries
 
 # TODO: Create a list of 5 of your favorite foods.
 
-foods = []
+foods = ["Sushi", "Fried Rice", "Pasta", "Fried Chicken", "Hamburger"]
 
 # Access items by index (first = 0):
 print(f"The first food is {foods[0]}")
@@ -30,16 +30,16 @@ print(f"The last food is {foods[-1]}")
 
 # TODO: Add a new food to the end of your list with .append()
 
-
+foods.append("Salad")
 # TODO: Insert a food at the beginning with .insert()
 
-
+foods.insert(0, "Banana")
 # TODO: Remove one food from the list with .remove()
 
-
+foods.remove("Salad")
 # TODO: How many foods are in the list? Use len()
 
-
+print(len(foods))
 # Bug Exploration:
 # Try removing something that isn’t in the list:
 # foods.remove("chocolate")
@@ -53,7 +53,7 @@ print(f"The last food is {foods[-1]}")
 
 # Bug Exploration:
 # Change your loop to go past the length of the list:
-for i in range(______):
+for i in range(len(foods)):
     print(f"Index {i} → {foods[i]}")
 # Q: Why does this cause an error?
 
@@ -70,7 +70,11 @@ me = {
 
 # TODO: Make a dictionary with at least 3 pieces of information about yourself.
 
-
+me = {
+    "name": "Shunsuke",
+    "age": 18,
+    "student": True
+    }
 # Access values using keys by using the .get() method rather than indexing
 # print(f"My name is {me['name']}")
 # print(f"My age is {me['age']}")
@@ -86,13 +90,13 @@ me = {
 
 # TODO: Add a new key-value pair.
 
-
+me["favorite_color"] = "Blue"
 # TODO: Change the value of an existing key.
 
-
+me["age"] = 19
 # TODO: Remove one key-value pair.
 
-
+me.pop("student")
 # Bug Exploration:
 # Try removing a key that doesn’t exist:
 # me.pop("grade")
@@ -103,7 +107,8 @@ me = {
 
 # TODO: Write a loop that prints both the keys and values in your dictionary using .items()
 
-
+for key, value in me.items():
+    print(f"{key}: {value}")
 # Bug Exploration:
 # What happens if you loop over just the dictionary without calling .items()?
 # for key in me:
@@ -117,13 +122,23 @@ me = {
 # TODO: Create a list of dictionaries. 
 # Example: a list of 3 friends, where each friend has a name and favorite food.
 
-
+friends = [
+    {
+        "name": "Ethan",
+        "favorite_food": "Bananas"
+    },
+    {
+        "name": "Henry",
+        "favorite_food": "Fried Rice"
+    },
+]
 # TODO: Print the favorite food of the second friend.
 
-
+print(friends[1]["favorite_food"])
 # TODO: Loop through and print "<name> likes <food>" for each friend.
 
-
+for friend in friends:
+    print(f"{friend['name']} likes {friend['favorite_food']}")        
 # Bug Exploration:
 # What happens if you try to access friend["hobby"] when "hobby" doesn’t exist in the dictionary?
 # Q: How might you prevent this kind of error in real programs?
