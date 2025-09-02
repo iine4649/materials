@@ -8,9 +8,9 @@ Your job is to experiment, fill in blanks, and notice patterns.
 # --- Section 1: Variables and Data Types ---
 
 # TODO: Create a variable called name that stores your name
-name = "Kevin"
+name = "Shunsuke"
 # TODO: Create a variable called age that stores your age
-age = 30
+age = 18
 # TODO: Create a variable called pi that stores the value 3.14159
 pi = 3.14159
 
