@@ -3,17 +3,17 @@ import random
 import sys
 from typing import List, Tuple, Optional
 
-# Pygame初期化
+# Initialize Pygame
 pygame.init()
 
-# 定数
+# Constants
 BLOCK_SIZE = 30
 GRID_WIDTH = 10
 GRID_HEIGHT = 20
 SCREEN_WIDTH = BLOCK_SIZE * (GRID_WIDTH + 8)
 SCREEN_HEIGHT = BLOCK_SIZE * GRID_HEIGHT
 
-# 色の定義
+# Color definitions
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (128, 128, 128)
@@ -25,7 +25,7 @@ GREEN = (0, 255, 0)
 PURPLE = (128, 0, 128)
 RED = (255, 0, 0)
 
-# テトロミノの形状定義
+# Tetromino shape definitions
 TETROMINOES = {
     'I': {
         'shape': [(0, 0), (0, 1), (0, 2), (0, 3)],
@@ -67,7 +67,7 @@ class Tetromino:
         self.blocks = TETROMINOES[shape]['shape']
     
     def get_blocks(self) -> List[Tuple[int, int]]:
-        """現在の回転状態でのブロック位置を取得"""
+        """Get block positions for the current rotation"""
         if self.shape == 'O':
             return self.blocks
         
@@ -85,11 +85,11 @@ class Tetromino:
         return rotated
     
     def rotate(self):
-        """テトロミノを回転"""
+        """Rotate the tetromino"""
         self.rotation = (self.rotation + 1) % 4
     
     def move(self, dx: int, dy: int):
-        """テトロミノを移動"""
+        """Move the tetromino"""
         self.x += dx
         self.y += dy
 
@@ -111,13 +111,13 @@ class TetrisGame:
         self.paused = False
         
         self.fall_time = 0
-        self.fall_speed = 500  # ミリ秒
+        self.fall_speed = 500  # milliseconds
         
         self.spawn_new_piece()
         self.spawn_new_piece()
     
     def spawn_new_piece(self):
-        """新しいテトロミノを生成"""
+        """Spawn a new tetromino"""
         if self.current_piece is None:
             self.current_piece = self.next_piece
         else:
@@ -127,7 +127,7 @@ class TetrisGame:
         self.next_piece = Tetromino(GRID_WIDTH // 2 - 1, 0, shape)
     
     def is_valid_position(self, piece: Tetromino, dx: int = 0, dy: int = 0) -> bool:
-        """指定された位置が有効かチェック"""
+        """Check if the specified position is valid"""
         for x, y in piece.get_blocks():
             new_x = piece.x + x + dx
             new_y = piece.y + y + dy
@@ -139,7 +139,7 @@ class TetrisGame:
         return True
     
     def place_piece(self):
-        """現在のピースをグリッドに配置"""
+        """Place the current piece on the grid"""
         for x, y in self.current_piece.get_blocks():
             grid_x = self.current_piece.x + x
             grid_y = self.current_piece.y + y
@@ -153,7 +153,7 @@ class TetrisGame:
             self.game_over = True
     
     def clear_lines(self):
-        """完成したラインを消去"""
+        """Clear completed lines"""
         lines_to_clear = []
         for y in range(GRID_HEIGHT):
             if all(cell is not None for cell in self.grid[y]):
@@ -170,7 +170,7 @@ class TetrisGame:
             self.fall_speed = max(50, 500 - (self.level - 1) * 50)
     
     def handle_input(self):
-        """ユーザー入力の処理"""
+        """Handle user input"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return False
@@ -205,7 +205,7 @@ class TetrisGame:
         return True
     
     def update(self):
-        """ゲーム状態の更新"""
+        """Update game state"""
         if self.paused or self.game_over:
             return
         
@@ -218,10 +218,10 @@ class TetrisGame:
             self.fall_time = current_time
     
     def draw(self):
-        """画面の描画"""
+        """Render the screen"""
         self.screen.fill(BLACK)
         
-        # グリッドの描画
+        # Draw grid
         for y in range(GRID_HEIGHT):
             for x in range(GRID_WIDTH):
                 if self.grid[y][x]:
@@ -230,7 +230,7 @@ class TetrisGame:
                     pygame.draw.rect(self.screen, WHITE,
                                    (x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE), 1)
         
-        # 現在のピースの描画
+        # Draw current piece
         if self.current_piece:
             for x, y in self.current_piece.get_blocks():
                 screen_x = (self.current_piece.x + x) * BLOCK_SIZE
@@ -241,22 +241,22 @@ class TetrisGame:
                     pygame.draw.rect(self.screen, WHITE,
                                    (screen_x, screen_y, BLOCK_SIZE, BLOCK_SIZE), 1)
         
-        # 右側の情報パネル
+        # Right-side info panel
         panel_x = GRID_WIDTH * BLOCK_SIZE + 20
         
-        # スコア
+        # Score
         score_text = self.font.render(f'スコア: {self.score}', True, WHITE)
         self.screen.blit(score_text, (panel_x, 20))
         
-        # レベル
+        # Level
         level_text = self.font.render(f'レベル: {self.level}', True, WHITE)
         self.screen.blit(level_text, (panel_x, 60))
         
-        # ライン数
+        # Lines
         lines_text = self.font.render(f'ライン: {self.lines_cleared}', True, WHITE)
         self.screen.blit(lines_text, (panel_x, 100))
         
-        # 次のピース
+        # Next piece
         next_text = self.font.render('次のピース:', True, WHITE)
         self.screen.blit(next_text, (panel_x, 160))
         
@@ -269,7 +269,7 @@ class TetrisGame:
                 pygame.draw.rect(self.screen, WHITE,
                                (screen_x, screen_y, BLOCK_SIZE, BLOCK_SIZE), 1)
         
-        # 操作説明
+        # Controls
         controls = [
             '操作説明:',
             '←→: 移動',
@@ -285,7 +285,7 @@ class TetrisGame:
             control_text = self.small_font.render(control, True, GRAY)
             self.screen.blit(control_text, (panel_x, 350 + i * 25))
         
-        # ゲームオーバー表示
+        # Game over overlay
         if self.game_over:
             overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
             overlay.set_alpha(128)
@@ -302,7 +302,7 @@ class TetrisGame:
                            (SCREEN_WIDTH // 2 - restart_text.get_width() // 2, 
                             SCREEN_HEIGHT // 2))
         
-        # 一時停止表示
+        # Pause overlay
         if self.paused:
             overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
             overlay.set_alpha(128)
@@ -317,7 +317,7 @@ class TetrisGame:
         pygame.display.flip()
     
     def run(self):
-        """メインゲームループ"""
+        """Main game loop"""
         running = True
         while running:
             running = self.handle_input()
@@ -329,7 +329,7 @@ class TetrisGame:
         sys.exit()
 
 def main():
-    """メイン関数"""
+    """Main function"""
     print("テトリスゲームを開始します...")
     print("pygameライブラリが必要です。インストールされていない場合は以下のコマンドでインストールしてください:")
     print("pip install pygame")
