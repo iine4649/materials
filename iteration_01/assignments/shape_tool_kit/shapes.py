@@ -62,7 +62,3 @@ class Triangle:
     def describe(self) -> None:
         print(f"Triangle with base {self.base} and height {self.height} has area {self.area()}")
 
-# TODO: Add helper function: cm2_to_m2(value_cm2: float) -> float
-
-def cm2_to_m2(value_cm2: float) -> float:
-    return value_cm2 / 10000
