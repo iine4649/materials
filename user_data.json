@@ -17,8 +17,10 @@
   "lol": {
     "name": "lol",
     "age": 18,
-    "multilingual": false,
-    "timestamp": "2025-09-02T09:23:44.477138",
-    "desired_language": "Spanish"
+    "multilingual": true,
+    "timestamp": "2025-09-03T08:48:30.140277",
+    "languages": [
+      "japanese"
+    ]
   }
 }
