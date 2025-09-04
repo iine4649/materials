@@ -6,6 +6,7 @@
         "pady",
         "Shunsuke",
         "Tetromino",
-        "TETROMINOES"
+        "TETROMINOES",
+        "yscrollcommand"
     ]
 }

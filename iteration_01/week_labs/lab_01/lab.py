@@ -139,7 +139,7 @@ class LanguageLearningApp:
                                            command=self.toggle_language_input)
         multilingual_check.grid(row=3, column=1, sticky=tk.W, pady=5)
         
-        # Language input frame
+        
         self.language_frame = ttk.LabelFrame(main_frame, text="Language Information", padding="10")
         self.language_frame.grid(row=5, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
         
@@ -154,22 +154,22 @@ class LanguageLearningApp:
                                            values=list(self.language_tips.keys()), width=20)
         self.desired_language.grid(row=4, column=1, sticky=tk.W, pady=5)
         
-        # Initially hidden
+        # Hide
         self.language_frame.grid_remove()
         
-        # Submit button
+        # Submit Button
         submit_btn = ttk.Button(main_frame, text="Send Information", command=self.process_user_info)
         submit_btn.grid(row=6, column=0, columnspan=2, pady=20)
         
-        # Result display area
+        #
         self.result_frame = ttk.LabelFrame(main_frame, text="Results", padding="10")
         self.result_frame.grid(row=7, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
         
-        # Result text
+        
         self.result_text = tk.Text(self.result_frame, height=15, width=70, wrap=tk.WORD)
         self.result_text.grid(row=0, column=0, sticky=(tk.W, tk.E))
         
-        # Scrollbar
+        
         scrollbar = ttk.Scrollbar(self.result_frame, orient=tk.VERTICAL, command=self.result_text.yview)
         scrollbar.grid(row=0, column=1, sticky=(tk.N, tk.S))
         self.result_text.configure(yscrollcommand=scrollbar.set)
@@ -202,7 +202,7 @@ class LanguageLearningApp:
                 messagebox.showerror("Error", "Please enter a valid age")
                 return
             
-            # Create user data
+            # User Info
             user_info = {
                 "name": name,
                 "age": age,
@@ -236,7 +236,7 @@ class LanguageLearningApp:
         
         result = f"Hello、{user_info['name']}！\n\n"
         
-        # Display age privileges
+        
         result += "Age Privileges Checklist:\n"
         result += "=" * 40 + "\n"
         
@@ -251,29 +251,11 @@ class LanguageLearningApp:
         
         result += "\n"
         
-        # Display language information
+        #
         if user_info['multilingual']:
             languages = user_info.get('languages', [])
             if languages:
-                '''
-                result += f"Spoken Languages:\n"
                 
-                for lang in sorted(languages):
-                    result += f"   • {lang}\n"
-                '''
-                # Translation of greetings using googletrans (fallback to simple dict)
-                
-                result += f"\nMultilingual Greetings:\n"
-                fallback_greetings = {
-                    "English": "Hello!",
-                    "Spanish": "¡Hola!",
-                    "French": "Bonjour!",
-                    "German": "Hallo!",
-                    "Chinese": "你好！",
-                    "Japanese": "こんにちは！"
-                } 
-                
-
                 for lang in languages:
                     greeting_text = None
                     if self.translator:
@@ -284,7 +266,7 @@ class LanguageLearningApp:
                             except Exception:
                                 greeting_text = None
                     if not greeting_text:
-                        greeting_text = fallback_greetings.get(str(lang).title(), "Hello!")
+                        greeting_text = str(lang).title(), "Hello!"
                     result += f"   {lang}: {greeting_text}\n"
         else:
             desired_lang = user_info.get('desired_language', '')
@@ -310,11 +292,11 @@ class LanguageLearningApp:
         if not self.user_data:
             return
         
-        # Display latest user
+        
         latest_user = max(self.user_data.values(), key=lambda x: x['timestamp'])
         self.display_results(latest_user)
         
-        # Set values to input fields
+        
         self.name_entry.delete(0, tk.END)
         self.name_entry.insert(0, latest_user['name'])
         
