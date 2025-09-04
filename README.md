@@ -1,32 +1,81 @@
 # Materials
 
-All materials for student's to pull each day when they arrive in class
+All materials for students to pull each day when they arrive in class. ReadMe page includes tips for python syntax and packages, basic git commands for initialization and daily workflow, links to best practices.
 
-# Student One Time Setup
+---
 
-1. Open Terminal
-2. Run the code git clone 'https://github.com/KSantos1995/materials.git' in your terminal to download all materials locally
-3. Create a folder where you will do your work with 'mkdir -p ~/my_work'
+# Python Resources
 
-# Student Daily Workflow
+1. Built-in Data Types [https://docs.python.org/3/library/stdtypes.html]  
+Video: [https://www.youtube.com/watch?v=ppsCxnNm-JI]
+2. Random Module [https://docs.python.org/3/library/random.html]  
+Video: [https://www.youtube.com/watch?v=KzqSDvzOFNA]
+3. CMath Module [https://docs.python.org/3/library/cmath.html]
+4. Complex() Function [https://docs.python.org/3/library/functions.html]
+5. Git Documentation [https://git-scm.com/docs]  
+Video: [https://www.youtube.com/watch?v=mVnZVw4KJnc]
+6. Modular Programming [https://best-practice-and-impact.github.io/qa-of-code-guidance/modular_code.html]
 
-1. Change directory in terminal to materials directory 'cd materials/'
-2. Grab most recent changes with 'git pull' then 'cd ..' to go back to a scope where you can see both directories.
-3. Copy specific file or directory to your work folder with 'cp -r materials/specific_file_or_folder my_work'
-4. When done working make sure to 'git push origin main' to save all of your work in your github repo. This is where I will track your submitted work.
+# Daily Workflow
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1. Change into the materials directory and pull the most recent changes:
+   ```bash
+    cd materials/
+    git pull
+2. Then move back up one level so you can see both materials and my_work directories. Copy the specific file or folder you need into your work folder:
+   ```bash
+    cd ..
+    cp -r materials/specific_file_or_folder my_work/
+3. When finished working, save your changes to your GitHub repository:
+   ```bash
+    git add .
+    git commit -m "Some notes about your work today"
+    git push origin main
 
-# Python Documentation
+# One-Time Setup (Students)
 
-1. For documentation on python data built in data types (booleans, comparisons, lists/dict, strings, int, float, classes, functions), go to https://docs.python.org/3/library/stdtypes.html
-2. For documentation on the random package, go to https://docs.python.org/3/library/random.html
-3. For documentation on cmath package, go to https://docs.python.org/3/library/cmath.html
-3. For documentation on complex() function, go to https://docs.python.org/3/library/functions.html#complex
-3. For documentation on git, go to https://git-scm.com/docs
+Do this **once** at the beginning of the course:
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1. Open **Terminal**.
+2. Clone the class materials repository:
+   ```bash
+   git clone https://github.com/KSantos1995/materials.git
+3. Create a folder where you will do your own work and initialize git with proper steps.
+    ```bash
+    mkdir -p ~/my_work
+    cd my_work
+    git init
+    git branch -m master main
+    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+    git config --global credential.helper store
 
-# Best Practices 
+4. Verify the remote connection is set correctly.
+    ```bash
+    git remote -v
 
-1. Modular Programming (https://best-practice-and-impact.github.io/qa-of-code-guidance/modular_code.html)
+That way, by the time they get to their **first push**, the credentials are already cached.  
+
+# Troubleshooting & Notes
+
+## First Push Asks for Username/Password
+GitHub no longer accepts account passwords for Git operations. You must use a **Personal Access Token (PAT)**.
+
+**Steps:**
+- Git will prompt you for:
+  - **Username:** your GitHub username  
+  - **Password:** your PAT
+
+### How to Generate a Personal Access Token (PAT)
+1. Log into GitHub.  
+2. Click your profile picture → **Settings**.  
+3. Select **Developer settings → Personal access tokens → Tokens (classic)**.  
+4. Click **Generate new token → Generate new token (classic)**.  
+5. Give the token a name (e.g., `ClassRepoToken`) and select an expiration date.  
+6. Under **Select scopes**, check:
+   - `repo` (access to your repositories)  
+7. Click **Generate token**.  
+8. Copy the token immediately — you won’t be able to see it again.  
+
+> After pasting your PAT for the first push, Git will remember it automatically if you ran:
+```bash
+git config --global credential.helper store
