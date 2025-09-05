@@ -39,12 +39,14 @@ import json
 import datetime
 import random
 import os
+import asyncio
+import time
 try:
     import googletrans  # type: ignore
     from googletrans import Translator  # type: ignore
-except Exception:  # Fallback when package not available at type-check time
+except Exception:  #
     googletrans = None  # type: ignore
-    Translator = None  # type: ignore
+    Translator = None  
 
 class LanguageLearningApp:
     def __init__(self, root):
@@ -78,15 +80,14 @@ class LanguageLearningApp:
             "Japanese": ["Learn Hiragana and Katakana", "Watch anime with Japanese subtitles", "Sing Japanese songs"]
         }
         
-        # googletrans setup
-        try:
-            self.translator = Translator()
-            # Map language display names to codes (title-cased to match typical user input)
-            self.lang_name_to_code = {name.title(): code for code, name in googletrans.LANGUAGES.items()}
+        
+        self.translator = Translator()
+        self.lang_name_to_code = {name.title(): code for code, name in googletrans.LANGUAGES.items()}
+        '''
         except Exception:
             self.translator = None
             self.lang_name_to_code = {}
-
+        '''
         self.create_widgets()
         
         # If there is saved user, display it
@@ -229,6 +230,18 @@ class LanguageLearningApp:
             messagebox.showerror("Error", "Please enter your age as a number")
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {e}")
+
+    def _translate_sync(self, text: str, dest_code: str) -> str | None:
+        time.sleep(0.5)  
+        if not self.translator or not dest_code:
+            return None
+        try:
+            r = self.translator.translate(text, dest=dest_code)
+            if asyncio.iscoroutine(r):
+                r = asyncio.run(r)
+            return getattr(r, "text", None)
+        except Exception:
+            return None
     
     def display_results(self, user_info):
         """Display results"""
@@ -257,17 +270,11 @@ class LanguageLearningApp:
             if languages:
                 
                 for lang in languages:
-                    greeting_text = None
-                    if self.translator:
-                        code = self.lang_name_to_code.get(str(lang).title())
-                        if code:
-                            try:
-                                greeting_text = self.translator.translate("Hello!", dest=code).text
-                            except Exception:
-                                greeting_text = None
-                    if not greeting_text:
-                        greeting_text = str(lang).title(), "Hello!"
+                
+                    code = self.lang_name_to_code.get(str(lang).title())
+                    greeting_text = self._translate_sync("Hello!", code)  #or fallback_greetings.get(str(lang).title(), "Hello!")
                     result += f"   {lang}: {greeting_text}\n"
+
         else:
             desired_lang = user_info.get('desired_language', '')
             if desired_lang:

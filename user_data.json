@@ -18,8 +18,18 @@
     "name": "lol",
     "age": 65,
     "multilingual": true,
-    "timestamp": "2025-09-03T09:53:04.029581",
+    "timestamp": "2025-09-04T09:49:21.699512",
     "languages": [
+      "Ukrainian"
+    ]
+  },
+  "honjo": {
+    "name": "honjo",
+    "age": 17,
+    "multilingual": true,
+    "timestamp": "2025-09-04T09:57:36.087046",
+    "languages": [
+      "Chinese (Simplified)",
       "Japanese"
     ]
   }
