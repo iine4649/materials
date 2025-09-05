@@ -90,7 +90,7 @@ class LanguageLearningApp:
         '''
         self.create_widgets()
         
-        # If there is saved user, display it
+        # Displaying Saved user
         if self.user_data:
             self.display_saved_user()
     
@@ -203,7 +203,7 @@ class LanguageLearningApp:
                 messagebox.showerror("Error", "Please enter a valid age")
                 return
             
-            # User Info
+            
             user_info = {
                 "name": name,
                 "age": age,
@@ -219,11 +219,11 @@ class LanguageLearningApp:
                 if desired_lang:
                     user_info["desired_language"] = desired_lang
             
-            # Save data
+            
             self.user_data[name] = user_info
             self.save_user_data()
             
-            # Display results
+            
             self.display_results(user_info)
             
         except ValueError:
@@ -232,9 +232,9 @@ class LanguageLearningApp:
             messagebox.showerror("Error", f"An error occurred: {e}")
 
     def _translate_sync(self, text: str, dest_code: str) -> str | None:
-        time.sleep(0.5)  
-        if not self.translator or not dest_code:
-            return None
+          
+ #       if not self.translator or not dest_code:
+#            return None
         try:
             r = self.translator.translate(text, dest=dest_code)
             if asyncio.iscoroutine(r):
@@ -242,6 +242,8 @@ class LanguageLearningApp:
             return getattr(r, "text", None)
         except Exception:
             return None
+    
+
     
     def display_results(self, user_info):
         """Display results"""
@@ -268,12 +270,11 @@ class LanguageLearningApp:
         if user_info['multilingual']:
             languages = user_info.get('languages', [])
             if languages:
-                
                 for lang in languages:
-                
                     code = self.lang_name_to_code.get(str(lang).title())
-                    greeting_text = self._translate_sync("Hello!", code)  #or fallback_greetings.get(str(lang).title(), "Hello!")
+                    greeting_text = self._translate_sync("Hello!", code)  #fallback_greetings.get(str(lang).title(), "Hello!")
                     result += f"   {lang}: {greeting_text}\n"
+                    time.sleep(0.5)
 
         else:
             desired_lang = user_info.get('desired_language', '')
@@ -287,7 +288,7 @@ class LanguageLearningApp:
                     for i, tip in enumerate(tips, 1):
                         result += f"{i}. {tip}\n"
                     
-                    # Calculation of recommended learning time
+                    # Random time for learning hours
                     recommended_hours = random.randint(3, 8)
                     result += f"\nRecommended weekly learning time: {recommended_hours} hours\n"
                     result += f"Target completion date: {datetime.datetime.now().year + random.randint(1, 3)} years\n"
