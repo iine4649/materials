@@ -56,6 +56,7 @@ print(len(foods))
 for i in range(len(foods)):
     print(f"Index {i} → {foods[i]}")
 # Q: Why does this cause an error?
+# Because the index is out of range of the list.
 
 
 # --- Section 4: Dictionaries (Key–Value Pairs) ---
@@ -84,6 +85,7 @@ me = {
 # Try printing a key that doesn’t exist.
 # print(me["hometown"])
 # Q: What kind of error is this? How could you check if a key exists before using it? Why is the .get() method useful here?
+# It is a KeyError. You can check if a key exists before using it by using the .get() method.
 
 
 # --- Section 5: Changing a Dictionary ---
@@ -101,6 +103,7 @@ me.pop("student")
 # Try removing a key that doesn’t exist:
 # me.pop("grade")
 # Q: What happens? Is this similar to removing from a list?
+# It is a KeyError.
 
 
 # --- Section 6: Loops with Dictionaries ---
@@ -115,6 +118,7 @@ for key, value in me.items():
 #     print(key)
 
 # Q: Why does it only print the keys? How can you change your for loop to print key and value pairs?
+# It only prints the keys because the dictionary is not iterable. 
 
 
 # --- Section 7: Mixing Lists and Dictionaries ---
@@ -142,12 +146,18 @@ for friend in friends:
 # Bug Exploration:
 # What happens if you try to access friend["hobby"] when "hobby" doesn’t exist in the dictionary?
 # Q: How might you prevent this kind of error in real programs?
+# You can check if a key exists before using it by using the .get() method.
 
 
 # --- Section 8: Reflection ---
 # Answer in comments:
 # 1. How is a list different from a dictionary?
+# It can take different type of variables, while a dictionary can only take one type of variable.
 # 2. When would you want to use a dictionary instead of a list?
+# When you want to store a collection of items with a specific key.
 # 3. Can you think of a real-world situation where combining lists and dictionaries would be useful?
+# When we have a collection of items and we want to store a specific key for each item.
 # 4. What types of mistakes gave you the most errors today?
+# Forgetting to use the .get() method when accessing a dictionary.
 # 5. How might noticing errors actually help you learn?
+# It helps us to understand the code better and to fix the code.
