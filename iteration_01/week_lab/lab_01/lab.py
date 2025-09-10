@@ -65,9 +65,8 @@ class LanguageLearningApp:
         self.age_privileges = {
             16: "Drivers License",
             18: "Voting Rights",
-            21: "Car Rental",
-            25: "Insurance Discount",
-            65: "Retirement"
+            25: "Car Rental",
+            35: "You are getting old..."
         }
         
         # Language learning tips
