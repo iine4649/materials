@@ -182,7 +182,7 @@ class LanguageLearningApp:
             saved_btn.grid(row=8, column=0, columnspan=2, pady=10)
     
     def toggle_language_input(self):
-        """Toggle language input field based on multilingual checkbox status"""
+        
         if self.multilingual_var.get():
             self.language_frame.grid()
             self.languages_entry.focus()
@@ -196,11 +196,11 @@ class LanguageLearningApp:
             age = int(self.age_entry.get().strip())
             
             if not name:
-                messagebox.showerror("Error", "Please enter your name")
+                messagebox.showerror("Error", "Name cannot be empty")
                 return
             
             if age <= 0 or age > 150:
-                messagebox.showerror("Error", "Please enter a valid age")
+                messagebox.showerror("Error", "Age is not valid")
                 return
             
             # User Info
@@ -227,7 +227,7 @@ class LanguageLearningApp:
             self.display_results(user_info)
             
         except ValueError:
-            messagebox.showerror("Error", "Please enter your age as a number")
+            messagebox.showerror("Error", "Enter your age as a number")
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {e}")
 
