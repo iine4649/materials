@@ -1,7 +1,7 @@
 import json
 
 # Need path to data file
-file_path = 'iteration_02/assignments/day_01/json_intro/'
+file_path = 'iteration_02/assignments/day_01/lesson_info/json_intro/'
 
 # --- Step 1: Load JSON data into a Python dictionary ---
 with open(f"{file_path}school_data.json", "r") as file:
