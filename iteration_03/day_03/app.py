@@ -33,6 +33,13 @@ def home():
 def get_joke():
     return jsonify(random.choice(jokes))
 
+
+def get_jokes(n):
+    joke_list = []
+    for i in range(n):
+        joke_list.append(random.choice(jokes))
+    return jsonify(joke_list)
+
 ###############################################################################
 # Now you need to add a route parameter! Think about how we can do this using #
 # our python logic after I show you how to insert a route parameter.          #
