@@ -1,5 +1,8 @@
 {% extends 'base.html' %} <!-- We want it to base template but to populate info for home page inside -->
 {% block title %} Home {% endblock %} <!-- inside of the title block, insert 'Home' -->
 {% block content %} <!-- inside of the block content, insert 'Welcome to the Flask Jinja2 application' -->
-<h1>You are in home</h1>
+<h1>You are in contact</h1>
+<p>Name: {{ name }}</p>
+<p>Phone: {{ phone }}</p>
+<p>Email: {{ email }}</p>
 {% endblock %}
