@@ -11,8 +11,8 @@ def home():
 
 @app.route("/contact")
 def contact():
-    phone = "123-wompp-wompp"
-    email = "shunsuke20070602honjo@gmail.com"
+    phone = "346-307-2614"
+    email = "shunsuke20070603honjo@gmail.com"
     return render_template("contact.html",name=name, phone=phone, email=email)
 
 @app.route("/about")
