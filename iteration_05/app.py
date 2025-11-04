@@ -11,7 +11,7 @@ def home():
 
 @app.route("/contact")
 def contact():
-    phone = "123-456-7890"
+    phone = "347-307-2613"
     email = "shunsuke20070602honjo@gmail.com"
     return render_template("contact.html",name=name, phone=phone, email=email)
 
@@ -25,7 +25,7 @@ def check_voting_eligibility():
         age = int(request.form.get("age", 0))
         
         if age >= 18:
-            eligibility_message = f"Congratulations! You are {age} years old and are eligible to vote!"
+            eligibility_message = f"You are eligible to vote!"
         else:
             eligibility_message = f"You are {age} years old. You need to be at least 18 years old to vote."
         
