@@ -2,21 +2,20 @@
 <html>
 <!-- Head tag contains metadata. Things that we don't see in the program like CSS links, Javascript imports if needed-->
 <head>
-    <!-- Title tag determines what ends up in browser tab -->
-    <!-- Since we want different pages, to have different titles, we use a jinja2 block -->
-    <!-- This means that templates which extend this one can replace the content of the title block with their own title.-->
-    <title> {% block title %}Not So Happy website{% endblock %} </title>
+    <title>{% block title %}Not So Happy website{% endblock %}</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
+<nav class="flex justify-between items-center p-4 bg-gray-800 text-white">
+    <a href="/" class="bg-gray-200 p-2 w-1/4 text-black hover:bg-blue-700 text-center">Home</a>
+    <a href="/contact" class="bg-gray-300 p-2 w-1/4 text-black hover:bg-blue-700 text-center">Contact</a>
+    <a href="/about" class="bg-gray-400 p-2 w-1/4 text-black hover:bg-blue-700 text-center">About</a>
+    <a href="/tennis" class="bg-gray-500 p-2 w-1/4 text-black hover:bg-blue-700 text-center">Tennis Game</a>
+  </nav>
 <!-- Body tag opens the main visible part of the webpage. Everything shown in the browser window lives inside here.-->
 <body>
     <!-- Navigation bar because I want all my pages to have the ability to navigate between other routes -->
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/contact">Contact</a> |
-        <a href="/about">About</a>
-    </nav>
-    <hr> <!-- This creates a horizontal line -->
+
 
     <!-- This is where child templates will insert content -->
     {% block content %}{% endblock %}

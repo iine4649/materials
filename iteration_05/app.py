@@ -11,13 +11,17 @@ def home():
 
 @app.route("/contact")
 def contact():
-    phone = "347-307-2613"
+    phone = "123-wompp-wompp"
     email = "shunsuke20070602honjo@gmail.com"
     return render_template("contact.html",name=name, phone=phone, email=email)
 
 @app.route("/about")
 def about():
     return render_template("about.html",name=name,age=my_age,hobbies=hobbies)
+
+@app.route("/tennis")
+def tennis():
+    return render_template("tennis.html")
 
 @app.route("/check_voting_eligibility", methods=["POST"])
 def check_voting_eligibility():
