@@ -1,23 +1,77 @@
 <!DOCTYPE html>
 <html>
-<!-- Head tag contains metadata. Things that we don't see in the program like CSS links, Javascript imports if needed-->
 <head>
     <title>{% block title %}Not So Happy website{% endblock %}</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #3B82F6;
+            --primary-hover: #2563EB;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            font-size: 1.125rem;
+            color: #000000;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+        
+        nav a {
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: var(--primary-hover) !important;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        button {
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        a {
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary-hover);
+        }
+    </style>
 </head>
-<nav class="flex justify-between items-center p-4 bg-gray-800 text-white">
-    <a href="/" class="bg-gray-200 p-2 w-1/4 text-black hover:bg-blue-700 text-center">Home</a>
-    <a href="/contact" class="bg-gray-300 p-2 w-1/4 text-black hover:bg-blue-700 text-center">Contact</a>
-    <a href="/about" class="bg-gray-400 p-2 w-1/4 text-black hover:bg-blue-700 text-center">About</a>
-    <a href="/tennis" class="bg-gray-500 p-2 w-1/4 text-black hover:bg-blue-700 text-center">Tennis Game</a>
-  </nav>
-<!-- Body tag opens the main visible part of the webpage. Everything shown in the browser window lives inside here.-->
-<body>
-    <!-- Navigation bar because I want all my pages to have the ability to navigate between other routes -->
+<body class="bg-gray-50">
+    <nav class="bg-gray-800 text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-blue-600 text-center font-medium">Home</a>
+                <a href="/contact" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-blue-600 text-center font-medium">Contact</a>
+                <a href="/about" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-blue-600 text-center font-medium">About</a>
+            </div>
+        </div>
+    </nav>
 
-
-    <!-- This is where child templates will insert content -->
-    {% block content %}{% endblock %}
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>

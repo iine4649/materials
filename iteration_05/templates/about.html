@@ -1,26 +1,43 @@
-{% extends 'base.html' %} <!-- We want it to base template but to populate info for home page inside -->
-{% block title %} Home {% endblock %} <!-- inside of the title block, insert 'Home' -->
-{% block content %} <!-- inside of the block content, insert 'Welcome to the Flask Jinja2 application' -->
-<h1>You are in about</h1>
-<p>Hey! My name is {{name}}. I am {{age}} years old and I am a student at NMH.</p>
-<p>My hobbies are:
-    {% for hobby in hobbies %}
-        <li>{{hobby}}</li>
-        {% endfor %}
-    </p>
-<form action="/check_voting_eligibility" method="post">
-    <label for="age_input">Enter your age:</label>
-    <input type="number" id="age_input" name="age" placeholder="Enter age" value="{{age}}">
-    <button type="submit">Check Eligibility to Vote</button>
-</form>
+{% extends 'base.html' %}
+{% block title %} About {% endblock %}
+{% block content %}
+<div class="bg-white rounded-lg shadow-md p-8">
+    <h1>About Me</h1>
+    
+    <div class="mb-8">
+        <p class="mb-4">Hey! My name is <strong class="text-blue-600">{{name}}</strong>. I am {{age}} years old and I am a student at NMH.</p>
+    </div>
+    
+    <div class="mb-8">
+        <h2>My Hobbies</h2>
+        <ul class="list-disc list-inside space-y-2 ml-4">
+            {% for hobby in hobbies %}
+                <li class="text-lg">{{hobby}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="border-t pt-6 mt-8">
+        <h2>Voting Eligibility Checker</h2>
+        <p class="mb-4">Enter your age to check if you're eligible to vote:</p>
+        <form action="/check_voting_eligibility" method="post" class="bg-gray-50 p-6 rounded-lg">
+            <div class="mb-4">
+                <label for="age_input" class="block text-gray-700 font-medium mb-2">Enter your age:</label>
+                <input type="number" id="age_input" name="age" placeholder="Enter age" value="{{age}}" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+            </div>
+            <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700">
+                Check Eligibility to Vote
+            </button>
+        </form>
+    </div>
 
-{% if eligibility_message %}
-    {% if submitted_age >= 18 %}
-        {{ eligibility_message }}
-    </p>
-    {% else %}
-        {{ eligibility_message }}
-    </p>
+    {% if eligibility_message %}
+        <div class="mt-6 p-4 rounded-lg {% if submitted_age >= 18 %}bg-green-50 border border-green-200{% else %}bg-yellow-50 border border-yellow-200{% endif %}">
+            <p class="font-semibold {% if submitted_age >= 18 %}text-green-800{% else %}text-yellow-800{% endif %}">
+                {{ eligibility_message }}
+            </p>
+        </div>
     {% endif %}
-{% endif %}
+</div>
 {% endblock %}
